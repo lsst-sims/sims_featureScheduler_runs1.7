@@ -1,0 +1,4 @@
+python /gscratch/astro/yoachim/git_repos/sims_featureScheduler_runs1.7/u_long/u_long_msnaps.py --u_expt 30 --outDir /gscratch/astro/yoachim/git_repos/sims_featureScheduler_runs1.7/u_long/
+python /gscratch/astro/yoachim/git_repos/sims_featureScheduler_runs1.7/u_long/u_long_msnaps.py --u_expt 40 --outDir /gscratch/astro/yoachim/git_repos/sims_featureScheduler_runs1.7/u_long/
+python /gscratch/astro/yoachim/git_repos/sims_featureScheduler_runs1.7/u_long/u_long_msnaps.py --u_expt 50 --outDir /gscratch/astro/yoachim/git_repos/sims_featureScheduler_runs1.7/u_long/
+python /gscratch/astro/yoachim/git_repos/sims_featureScheduler_runs1.7/u_long/u_long_msnaps.py --u_expt 60 --outDir /gscratch/astro/yoachim/git_repos/sims_featureScheduler_runs1.7/u_long/

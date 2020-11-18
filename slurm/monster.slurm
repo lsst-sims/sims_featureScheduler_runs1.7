@@ -2,7 +2,7 @@
 
 ## Job Name
 
-#SBATCH --job-name=baseline17
+#SBATCH --job-name=monster
 
 ## Allocation Definition
 
@@ -57,5 +57,5 @@ cd /gscratch/astro/yoachim/git_repos/sims_featureScheduler_runs1.7/slurm
 ## run all the baseline commands in parallel
 module load parallel-20170722
 ## only need to do 5 at a time, since there are only that many in the list
-cat run_baseline17.script | parallel -j 20
+cat monster.sh | parallel -j 20
 
