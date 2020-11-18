@@ -1,5 +1,3 @@
-python /gscratch/astro/yoachim/git_repos/sims_featureScheduler_runs1.7/baseline17/baseline.py --nexp 1 --outDir /gscratch/astro/yoachim/git_repos/sims_featureScheduler_runs1.7/baseline17/
-python /gscratch/astro/yoachim/git_repos/sims_featureScheduler_runs1.7/baseline17/baseline.py --nexp 2 --outDir /gscratch/astro/yoachim/git_repos/sims_featureScheduler_runs1.7/baseline17/
 python /gscratch/astro/yoachim/git_repos/sims_featureScheduler_runs1.7/euclid_dither/euclid_dither.py  --outDir /gscratch/astro/yoachim/git_repos/sims_featureScheduler_runs1.7/euclid_dither/
 python /gscratch/astro/yoachim/git_repos/sims_featureScheduler_runs1.7/pair_times/pair_times.py --pair_time 11 --outDir /gscratch/astro/yoachim/git_repos/sims_featureScheduler_runs1.7/pair_times
 python /gscratch/astro/yoachim/git_repos/sims_featureScheduler_runs1.7/pair_times/pair_times.py --pair_time 22 --outDir /gscratch/astro/yoachim/git_repos/sims_featureScheduler_runs1.7/pair_times
