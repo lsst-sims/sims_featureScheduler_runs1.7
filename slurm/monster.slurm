@@ -14,7 +14,8 @@
 
 ## Nodes
 
-#SBATCH --nodes=1   
+#SBATCH --nodes=3
+#SBATCH --ntasks-per-node=20   
 
 ## Walltime (hours:min:sec) Do not specify a walltime substantially more than your job needs.
 
@@ -32,7 +33,7 @@
 
 ## Specify the working directory for this job
 
-#SBATCH --chdir=/gscratch/astro/yoachim/git_repos/sims_featureScheduler_runs1.7/slurm
+#SBATCH --chdir=/gscratch/scrubbed/yoachim/sims_featureScheduler_runs1.7/slurm
 
 ##turn on e-mail notification
 
@@ -52,10 +53,10 @@ setup sims_maf -t $USER -t sims_w_2020_02
 setup sims_maf_contrib -t $USER -t sims_w_2020_02
 
 
-cd /gscratch/astro/yoachim/git_repos/sims_featureScheduler_runs1.7/slurm
+cd /gscratch/scrubbed/yoachim/sims_featureScheduler_runs1.7/slurm
 
 ## run all the baseline commands in parallel
 module load parallel-20170722
 ## only need to do 5 at a time, since there are only that many in the list
-cat monster.sh | parallel -j 20
+cat monster.sh | parallel -j 60
 
