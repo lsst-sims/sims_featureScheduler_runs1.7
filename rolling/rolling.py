@@ -512,7 +512,9 @@ if __name__ == "__main__":
     # Set up the DDF surveys to dither
     dither_detailer = detailers.Dither_detailer(per_night=per_night, max_dither=max_dither)
     details = [detailers.Camera_rot_detailer(min_rot=-camera_ddf_rot_limit, max_rot=camera_ddf_rot_limit), dither_detailer]
-    ddfs = generate_dd_surveys(nside=nside, nexp=nexp, detailers=details)
+    euclid_detailers = [detailers.Camera_rot_detailer(min_rot=-camera_ddf_rot_limit, max_rot=camera_ddf_rot_limit),
+                        detailers.Euclid_dither_detailer()]
+    ddfs = generate_dd_surveys(nside=nside, nexp=nexp, detailers=details, euclid_detailers=euclid_detailers)
 
     # Set up rolling maps
     footprints = make_rolling_footprints(mjd_start=conditions.mjd_start,

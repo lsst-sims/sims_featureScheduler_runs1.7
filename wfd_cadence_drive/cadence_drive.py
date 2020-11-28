@@ -380,7 +380,9 @@ if __name__ == "__main__":
     # Set up the DDF surveys to dither
     dither_detailer = detailers.Dither_detailer(per_night=per_night, max_dither=max_dither)
     details = [detailers.Camera_rot_detailer(min_rot=-camera_ddf_rot_limit, max_rot=camera_ddf_rot_limit), dither_detailer]
-    ddfs = generate_dd_surveys(nside=nside, nexp=nexp, detailers=details)
+    euclid_detailers = [detailers.Camera_rot_detailer(min_rot=-camera_ddf_rot_limit, max_rot=camera_ddf_rot_limit),
+                        detailers.Euclid_dither_detailer()]
+    ddfs = generate_dd_surveys(nside=nside, nexp=nexp, detailers=details, euclid_detailers=euclid_detailers)
 
     greedy = gen_greedy_surveys(nside, nexp=nexp, footprints=footprints)
     prevent_gaps = generate_blobs(nside, filter1s=['g'], filter2s=['r'],
