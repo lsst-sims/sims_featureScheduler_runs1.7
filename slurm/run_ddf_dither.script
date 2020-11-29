@@ -1,0 +1,8 @@
+python /gscratch/scrubbed/yoachim/sims_featureScheduler_runs1.7/ddf_dither/ddf_dither.py --maxDither 0. --outDir /gscratch/scrubbed/yoachim/sims_featureScheduler_runs1.7/ddf_dither/
+python /gscratch/scrubbed/yoachim/sims_featureScheduler_runs1.7/ddf_dither/ddf_dither.py --maxDither 0.05 --outDir /gscratch/scrubbed/yoachim/sims_featureScheduler_runs1.7/ddf_dither/
+python /gscratch/scrubbed/yoachim/sims_featureScheduler_runs1.7/ddf_dither/ddf_dither.py --maxDither 0.1 --outDir /gscratch/scrubbed/yoachim/sims_featureScheduler_runs1.7/ddf_dither/
+python /gscratch/scrubbed/yoachim/sims_featureScheduler_runs1.7/ddf_dither/ddf_dither.py --maxDither 0.3 --outDir /gscratch/scrubbed/yoachim/sims_featureScheduler_runs1.7/ddf_dither/
+python /gscratch/scrubbed/yoachim/sims_featureScheduler_runs1.7/ddf_dither/ddf_dither.py --maxDither 0.7 --outDir /gscratch/scrubbed/yoachim/sims_featureScheduler_runs1.7/ddf_dither/
+python /gscratch/scrubbed/yoachim/sims_featureScheduler_runs1.7/ddf_dither/ddf_dither.py --maxDither 1. --outDir /gscratch/scrubbed/yoachim/sims_featureScheduler_runs1.7/ddf_dither/
+python /gscratch/scrubbed/yoachim/sims_featureScheduler_runs1.7/ddf_dither/ddf_dither.py --maxDither 1.5 --outDir /gscratch/scrubbed/yoachim/sims_featureScheduler_runs1.7/ddf_dither/
+python /gscratch/scrubbed/yoachim/sims_featureScheduler_runs1.7/ddf_dither/ddf_dither.py --maxDither 2.0 --outDir /gscratch/scrubbed/yoachim/sims_featureScheduler_runs1.7/ddf_dither/
