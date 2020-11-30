@@ -295,6 +295,7 @@ if __name__ == "__main__":
     parser.add_argument("--moon_illum_limit", type=float, default=40., help="illumination limit to remove u-band")
     parser.add_argument("--nexp", type=int, default=2)
     parser.add_argument("--scale_down", dest='scale_down', action='store_true')
+    parser.add_argument("--dither_model", type=int, default=1)
     parser.set_defaults(scale_down=False)
 
     args = parser.parse_args()
@@ -305,11 +306,26 @@ if __name__ == "__main__":
     illum_limit = args.moon_illum_limit
     nexp = args.nexp
     scale_down = args.scale_down
+    dither_model = args.dither_model
 
     nside = 32
     per_night = True  # Dither DDF per night
 
     camera_ddf_rot_limit = 75.
+
+    dither_models = {}
+    # first pass
+    dither_models[1] = {'dither_bearing_dir': [-0.25, 1], 'dither_bearing_perp': [-0.25, 0.25]}
+    # Not as far back
+    dither_models[2] = {'dither_bearing_dir': [-0.1, 1], 'dither_bearing_perp': [-0.25, 0.25]}
+    # Not as much up and down
+    dither_models[3] = {'dither_bearing_dir': [-0.25, 1], 'dither_bearing_perp': [-0.1, 0.1]}
+    # Farther forward
+    dither_models[4] = {'dither_bearing_dir': [-0.25, 1.5], 'dither_bearing_perp': [-0.25, 0.25]}
+    # Less forward
+    dither_models[5] = {'dither_bearing_dir': [-0.25, 0.75], 'dither_bearing_perp': [-0.25, 0.25]}
+
+
 
     extra_info = {}
     exec_command = ''
@@ -323,7 +339,7 @@ if __name__ == "__main__":
 
     extra_info['file executed'] = os.path.realpath(__file__)
 
-    fileroot = 'euclid_dither'
+    fileroot = 'euclid_dither%i_' % dither_model
     file_end = 'v1.7_'
 
     if scale_down:
@@ -342,7 +358,7 @@ if __name__ == "__main__":
     dither_detailer = detailers.Dither_detailer(per_night=per_night, max_dither=max_dither)
     details = [detailers.Camera_rot_detailer(min_rot=-camera_ddf_rot_limit, max_rot=camera_ddf_rot_limit), dither_detailer]
     euclid_detailers = [detailers.Camera_rot_detailer(min_rot=-camera_ddf_rot_limit, max_rot=camera_ddf_rot_limit),
-                        detailers.Euclid_dither_detailer()]
+                        detailers.Euclid_dither_detailer(**dither_models[dither_model])]
     ddfs = generate_dd_surveys(nside=nside, nexp=nexp, detailers=details, euclid_detailers=euclid_detailers)
 
     greedy = gen_greedy_surveys(nside, nexp=nexp, footprints=footprints)

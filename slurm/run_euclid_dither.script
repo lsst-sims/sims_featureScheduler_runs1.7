@@ -1,1 +1,5 @@
-python /gscratch/scrubbed/yoachim/sims_featureScheduler_runs1.7/euclid_dither/euclid_dither.py  --outDir /gscratch/scrubbed/yoachim/sims_featureScheduler_runs1.7/euclid_dither/
+python /gscratch/scrubbed/yoachim/sims_featureScheduler_runs1.7/euclid_dither/euclid_dither.py --dither_model 1 --outDir /gscratch/scrubbed/yoachim/sims_featureScheduler_runs1.7/euclid_dither/
+python /gscratch/scrubbed/yoachim/sims_featureScheduler_runs1.7/euclid_dither/euclid_dither.py --dither_model 2 --outDir /gscratch/scrubbed/yoachim/sims_featureScheduler_runs1.7/euclid_dither/
+python /gscratch/scrubbed/yoachim/sims_featureScheduler_runs1.7/euclid_dither/euclid_dither.py --dither_model 3 --outDir /gscratch/scrubbed/yoachim/sims_featureScheduler_runs1.7/euclid_dither/
+python /gscratch/scrubbed/yoachim/sims_featureScheduler_runs1.7/euclid_dither/euclid_dither.py --dither_model 4 --outDir /gscratch/scrubbed/yoachim/sims_featureScheduler_runs1.7/euclid_dither/
+python /gscratch/scrubbed/yoachim/sims_featureScheduler_runs1.7/euclid_dither/euclid_dither.py --dither_model 5 --outDir /gscratch/scrubbed/yoachim/sims_featureScheduler_runs1.7/euclid_dither/
