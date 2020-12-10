@@ -304,6 +304,7 @@ def generate_twilight_neo(nside, night_pattern=None, nexp=1, exptime=1, camera_r
         detailer_list = []
         detailer_list.append(detailers.Camera_rot_detailer(min_rot=np.min(camera_rot_limits), max_rot=np.max(camera_rot_limits)))
         detailer_list.append(detailers.Close_alt_detailer())
+        # Should put in a detailer so things start at lowest altitude
         detailer_list.append(detailers.Twilight_triple_detailer(slew_estimate=slew_estimate, n_repeat=3))
         bfs = []
 
@@ -315,16 +316,17 @@ def generate_twilight_neo(nside, night_pattern=None, nexp=1, exptime=1, camera_r
         bfs.append((bf.Slewtime_basis_function(filtername=filtername, nside=nside), slewtime_weight))
         bfs.append((bf.Strict_filter_basis_function(filtername=filtername), stayfilter_weight))
         # Need a toward the sun, reward high airmass, with an airmass cutoff basis function.
-        #bfs.append((bf.Near_sun_twilight_basis_function(nside=nside, max_airmass=2.), 0))
-        bfs.append((bf.Near_sun_twilight_basis_function(nside=nside, max_airmass=1.1), 0))
+        bfs.append((bf.Near_sun_twilight_basis_function(nside=nside, max_airmass=2.), 0))
         bfs.append((bf.Zenith_shadow_mask_basis_function(nside=nside, shadow_minutes=60., max_alt=76.), 0))
         bfs.append((bf.Moon_avoidance_basis_function(nside=nside, moon_distance=30.), 0))
         bfs.append((bf.Filter_loaded_basis_function(filternames=filtername), 0))
         bfs.append((bf.Planet_mask_basis_function(nside=nside), 0))
+        bfs.append((bf.Solar_elongation_mask_basis_function(min_elong=0., max_elong=60., nside=nside), 0))
+
         bfs.append((bf.Sun_alt_limit_basis_function(), 0))
         bfs.append((bf.Time_in_twilight_basis_function(time_needed=5.), 0))
         bfs.append((bf.Night_modulo_basis_function(pattern=night_pattern), 0))
-        bfs.append((bf.Solar_elongation_mask_basis_function(min_elong=0., max_elong=60., nside=nside), 0))
+
         # unpack the basis functions and weights
         weights = [val[1] for val in bfs]
         basis_functions = [val[0] for val in bfs]
@@ -333,7 +335,8 @@ def generate_twilight_neo(nside, night_pattern=None, nexp=1, exptime=1, camera_r
         surveys.append(Blob_survey(basis_functions, weights, filtername1=filtername, filtername2=None,
                                    ideal_pair_time=3., nside=nside, exptime=exptime,
                                    survey_note=survey_name, ignore_obs=['DD', 'greedy', 'blob'], dither=True,
-                                   nexp=nexp, detailers=detailer_list, az_range=180., twilight_scale=False))
+                                   nexp=nexp, detailers=detailer_list, az_range=180., twilight_scale=False,
+                                   area_required=area_required))
 
     return surveys
 
@@ -342,7 +345,7 @@ def run_sched(surveys, survey_length=365.25, nside=32, fileroot='baseline_', ver
               extra_info=None, illum_limit=40.):
     years = np.round(survey_length/365.25)
     scheduler = Core_scheduler(surveys, nside=nside)
-    n_visit_limit = 26
+    n_visit_limit = None
     filter_sched = simple_filter_sched(illum_limit=illum_limit)
     observatory = Model_observatory(nside=nside)
     observatory, scheduler, observations = sim_runner(observatory, scheduler,
@@ -364,7 +367,7 @@ if __name__ == "__main__":
     parser.add_argument("--moon_illum_limit", type=float, default=40., help="illumination limit to remove u-band")
     parser.add_argument("--nexp", type=int, default=2)
     parser.add_argument("--scale_down", dest='scale_down', action='store_true')
-    parser.add_argument("--night_mod", type=int, default=1)
+    parser.add_argument("--night_pattern", type=int, default=1)
     parser.set_defaults(scale_down=False)
 
     args = parser.parse_args()
@@ -375,7 +378,7 @@ if __name__ == "__main__":
     illum_limit = args.moon_illum_limit
     nexp = args.nexp
     scale_down = args.scale_down
-    night_mod = args.night_mod
+    night_pattern = args.night_pattern
 
     nside = 32
     per_night = True  # Dither DDF per night
@@ -394,18 +397,24 @@ if __name__ == "__main__":
 
     extra_info['file executed'] = os.path.realpath(__file__)
 
-    fileroot = 'twi_neo_mod%i_' % night_mod
+    fileroot = 'twi_neo_pattern%i_' % night_pattern
     file_end = 'v1.7_'
 
     if scale_down:
         footprints_hp = nes_light_footprints(nside=nside)
-        fileroot = fileroot +'scaleddown_'
+        fileroot = fileroot + 'scaleddown_'
     else:
         footprints_hp = standard_goals(nside=nside)
 
     pattern_dict = {1: [True], 2: [True, False], 3: [True, False, False],
-                    4: [True, False, False, False]}
-    night_pattern = pattern_dict[night_mod]
+                    4: [True, False, False, False],
+                    # 4 on, 4 off
+                    5: [True, True, True, True, False, False, False, False],
+                    # 3 on 4 off
+                    6: [True, True, True, False, False, False, False],
+                    7: [True, True, False, False, False, False]}
+
+    night_pattern = pattern_dict[night_pattern]
 
     observatory = Model_observatory(nside=nside)
     conditions = observatory.return_conditions()
