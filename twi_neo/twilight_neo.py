@@ -289,7 +289,7 @@ def ecliptic_target(nside=32, dist_to_eclip=40., dec_max=30.):
 
 
 def generate_twilight_neo(nside, night_pattern=None, nexp=1, exptime=1, camera_rot_limits=[-80., 80.],
-                          footprint_weight=0.1, slewtime_weight=3., stayfilter_weight=3., area_required=1000.):
+                          footprint_weight=0.1, slewtime_weight=3., stayfilter_weight=3., area_required=None):
 # XXX finish eliminating magic numbers and document this one
     slew_estimate = 4.5
     filters = 'riz'
