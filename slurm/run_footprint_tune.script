@@ -1,0 +1,9 @@
+python /gscratch/scrubbed/yoachim/sims_featureScheduler_runs1.7/footprint_tune/footprint_tune.py --fpid 0  --outDir /gscratch/scrubbed/yoachim/sims_featureScheduler_runs1.7/footprint_tune/
+python /gscratch/scrubbed/yoachim/sims_featureScheduler_runs1.7/footprint_tune/footprint_tune.py --fpid 1  --outDir /gscratch/scrubbed/yoachim/sims_featureScheduler_runs1.7/footprint_tune/
+python /gscratch/scrubbed/yoachim/sims_featureScheduler_runs1.7/footprint_tune/footprint_tune.py --fpid 2  --outDir /gscratch/scrubbed/yoachim/sims_featureScheduler_runs1.7/footprint_tune/
+python /gscratch/scrubbed/yoachim/sims_featureScheduler_runs1.7/footprint_tune/footprint_tune.py --fpid 3  --outDir /gscratch/scrubbed/yoachim/sims_featureScheduler_runs1.7/footprint_tune/
+python /gscratch/scrubbed/yoachim/sims_featureScheduler_runs1.7/footprint_tune/footprint_tune.py --fpid 4  --outDir /gscratch/scrubbed/yoachim/sims_featureScheduler_runs1.7/footprint_tune/
+python /gscratch/scrubbed/yoachim/sims_featureScheduler_runs1.7/footprint_tune/footprint_tune.py --fpid 5  --outDir /gscratch/scrubbed/yoachim/sims_featureScheduler_runs1.7/footprint_tune/
+python /gscratch/scrubbed/yoachim/sims_featureScheduler_runs1.7/footprint_tune/footprint_tune.py --fpid 6  --outDir /gscratch/scrubbed/yoachim/sims_featureScheduler_runs1.7/footprint_tune/
+python /gscratch/scrubbed/yoachim/sims_featureScheduler_runs1.7/footprint_tune/footprint_tune.py --fpid 7  --outDir /gscratch/scrubbed/yoachim/sims_featureScheduler_runs1.7/footprint_tune/
+python /gscratch/scrubbed/yoachim/sims_featureScheduler_runs1.7/footprint_tune/footprint_tune.py --fpid 8  --outDir /gscratch/scrubbed/yoachim/sims_featureScheduler_runs1.7/footprint_tune/
