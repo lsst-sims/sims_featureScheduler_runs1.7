@@ -467,7 +467,7 @@ def footprint_maker(fpid):
     fps.append(combo_dust_fp())
     # 1 No northern stripe
     fps.append(combo_dust_fp(north_weights={}))
-    # 2 No north, bring in the WFD a bit. Old footprint is -62.5 to 3.6
+    # 2 No north, bring in the WFD a bit. wfd_north_dec=7.8, wfd_south_dec=-70.2,
     fps.append(combo_dust_fp(north_weights={},
                              wfd_north_dec=8., wfd_south_dec=-67.4))
     # 3 No north, bring in the WFD a bit. Old footprint is -62.5 to 3.6, extend bridge south
