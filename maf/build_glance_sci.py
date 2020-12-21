@@ -7,4 +7,5 @@ if __name__ == '__main__':
     with open('sci_glance.sh', 'w') as f:
         for filename in files:
             print('python ../scimaf_dir.py --db %s' % filename, file=f)
+        for filename in files:
             print('python ../glance_dir.py --db %s' % filename, file=f)
