@@ -2,7 +2,7 @@
 
 ## Job Name
 
-#SBATCH --job-name=monster
+#SBATCH --job-name=monster2
 
 ## Allocation Definition
 
@@ -58,5 +58,5 @@ cd /gscratch/scrubbed/yoachim/sims_featureScheduler_runs1.7/slurm
 ## run all the baseline commands in parallel
 module load parallel-20170722
 ## only need to do 5 at a time, since there are only that many in the list
-cat monster.sh | parallel -j 20
+cat monster2.sh | parallel -j 20
 
