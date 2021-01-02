@@ -59,5 +59,5 @@ cd /gscratch/scrubbed/yoachim/sims_featureScheduler_runs1.7/maf
 ## run all the baseline commands in parallel
 module load parallel-20170722
 
-cat ss2_script.sh | parallel -j 40
-cat ss3_script.sh | parallel -j 40
+cat ss2_script.sh | parallel -j 30
+cat ss3_script.sh | parallel -j 30
