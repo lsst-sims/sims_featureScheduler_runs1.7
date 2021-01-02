@@ -15,7 +15,7 @@
 ## Nodes
 
 #SBATCH --nodes=2
-#SBATCH --ntasks-per-node=20   
+#SBATCH --ntasks-per-node=15   
 
 ## Walltime (hours:min:sec) Do not specify a walltime substantially more than your job needs.
 
