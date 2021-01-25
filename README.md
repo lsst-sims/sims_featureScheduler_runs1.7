@@ -19,7 +19,7 @@ Runs available at:  https://lsst.ncsa.illinois.edu/sim-data/sims_featureSchedule
 baseline_nexp1_v1.7_10yrs.db  
 baseline_nexp2_v1.7_10yrs.db  
 
-Our latest baseline runs, with 1x30s and 2x15s visits.
+Our latest baseline runs, with 1x30s and 2x15s visits. Note all the otehr runs in this release are done with 2x15s snaps, so baseline_nexp2_v1.7_10yrs.db is the best run to use for comparisons. 
 
 ## rolling
 
@@ -36,7 +36,7 @@ rolling_scale0.9_nslice3_v1.7_10yrs.db
 rolling_scale1.0_nslice2_v1.7_10yrs.db  
 rolling_scale1.0_nslice3_v1.7_10yrs.db  
 
-The latest rolling cadence simulations with the classic footprint. The strength of the rolling is varried between 20 and 100%. We also try dividing the wide-fast-deep area in half (nslice2) and thirds (nsilce3).
+The latest rolling cadence simulations with the classic footprint. The strength of the rolling is varried between 20 and 100%. We also try dividing the wide-fast-deep area in half (nslice2) and thirds (nsilce3). The nslice3 runs do not increase the cadence as much as might be expected, they probably need some basis function weight adjustments. 
 
 
 
