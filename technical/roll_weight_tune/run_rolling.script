@@ -1,0 +1,36 @@
+python rolling_nm.py --nslice 2 --fpw 0.600000 --uncontiguous
+python rolling_nm.py --nslice 2 --fpw 0.600000
+python rolling_nm.py --nslice 3 --fpw 0.600000 --uncontiguous
+python rolling_nm.py --nslice 3 --fpw 0.600000
+python rolling_nm.py --nslice 2 --fpw 0.900000 --uncontiguous
+python rolling_nm.py --nslice 2 --fpw 0.900000
+python rolling_nm.py --nslice 3 --fpw 0.900000 --uncontiguous
+python rolling_nm.py --nslice 3 --fpw 0.900000
+python rolling_nm.py --nslice 2 --fpw 1.200000 --uncontiguous
+python rolling_nm.py --nslice 2 --fpw 1.200000
+python rolling_nm.py --nslice 3 --fpw 1.200000 --uncontiguous
+python rolling_nm.py --nslice 3 --fpw 1.200000
+python rolling_nm.py --nslice 2 --fpw 1.500000 --uncontiguous
+python rolling_nm.py --nslice 2 --fpw 1.500000
+python rolling_nm.py --nslice 3 --fpw 1.500000 --uncontiguous
+python rolling_nm.py --nslice 3 --fpw 1.500000
+python rolling_nm.py --nslice 2 --fpw 1.800000 --uncontiguous
+python rolling_nm.py --nslice 2 --fpw 1.800000
+python rolling_nm.py --nslice 3 --fpw 1.800000 --uncontiguous
+python rolling_nm.py --nslice 3 --fpw 1.800000
+python rolling_nm.py --nslice 2 --fpw 2.100000 --uncontiguous
+python rolling_nm.py --nslice 2 --fpw 2.100000
+python rolling_nm.py --nslice 3 --fpw 2.100000 --uncontiguous
+python rolling_nm.py --nslice 3 --fpw 2.100000
+python rolling_nm.py --nslice 2 --fpw 2.400000 --uncontiguous
+python rolling_nm.py --nslice 2 --fpw 2.400000
+python rolling_nm.py --nslice 3 --fpw 2.400000 --uncontiguous
+python rolling_nm.py --nslice 3 --fpw 2.400000
+python rolling_nm.py --nslice 2 --fpw 2.700000 --uncontiguous
+python rolling_nm.py --nslice 2 --fpw 2.700000
+python rolling_nm.py --nslice 3 --fpw 2.700000 --uncontiguous
+python rolling_nm.py --nslice 3 --fpw 2.700000
+python rolling_nm.py --nslice 2 --fpw 3.000000 --uncontiguous
+python rolling_nm.py --nslice 2 --fpw 3.000000
+python rolling_nm.py --nslice 3 --fpw 3.000000 --uncontiguous
+python rolling_nm.py --nslice 3 --fpw 3.000000
