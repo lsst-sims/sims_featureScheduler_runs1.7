@@ -57,5 +57,5 @@ cd /gscratch/scrubbed/yoachim/sims_featureScheduler_runs1.7/technical/roll_weigh
 ## run all the baseline commands in parallel
 module load parallel-20170722
 ## only need to do 5 at a time, since there are only that many in the list
-cat run_baseline17.script | parallel -j 20
+cat run_rolling.script | parallel -j 20
 
