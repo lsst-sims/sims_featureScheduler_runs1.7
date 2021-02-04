@@ -472,8 +472,8 @@ if __name__ == "__main__":
     parser.add_argument("--scale", type=float, default=0.9)
     parser.add_argument("--nexp", type=int, default=2)
     parser.add_argument("--fpw", type=float, default=0.6)
-    parser.add_argument("--uncontiguous", dest='uncontiguous', action='store_true')
-    parser.set_defaults(uncontiguous=False)
+    parser.add_argument("--nogrow", dest='nogrow', action='store_true')
+    parser.set_defaults(nogrow=False)
 
 
     args = parser.parse_args()
@@ -485,7 +485,7 @@ if __name__ == "__main__":
     nslice = args.nslice
     nexp = args.nexp
     fpw = args.fpw
-    grow_blob = ~args.uncontiguous
+    grow_blob = not args.nogrow
 
     nside = 32
     per_night = True  # Dither DDF per night
