@@ -1,3 +1,4 @@
+python ../../baseline/baseline.py
 python rolling_nm.py --nslice 2 --fpw 0.600000 --nogrow
 python rolling_nm.py --nslice 2 --fpw 0.600000
 python rolling_nm.py --nslice 3 --fpw 0.600000 --nogrow
