@@ -90,6 +90,6 @@ def spot_inspect(filename, ra, dec, year_max=8.5, outDir='temp', season_pad=80):
         ax1.axvline(br)
     ax1.set_ylim([19.5, 25.5])
     #plt.xlim([1340, 1560])
-    ax1.set_title(name+' ra=%.2f, dec=%.2f' % (ra, dec))
+    ax1.set_title(name+'\nra=%.2f, dec=%.2f' % (ra, dec))
 
     return fig, ax1
