@@ -469,7 +469,7 @@ if __name__ == "__main__":
     parser.add_argument("--outDir", type=str, default="")
     parser.add_argument("--maxDither", type=float, default=0.7, help="Dither size for DDFs (deg)")
     parser.add_argument("--nslice", type=int, default=2)
-    parser.add_argument("--scale", type=float, default=0.9)
+    parser.add_argument("--scale", type=float, default=0.75)
     parser.add_argument("--nexp", type=int, default=2)
     parser.add_argument("--fpw", type=float, default=0.6)
     parser.add_argument("--nogrow", dest='nogrow', action='store_true')
@@ -504,7 +504,7 @@ if __name__ == "__main__":
 
     extra_info['file executed'] = os.path.realpath(__file__)
 
-    fileroot = 'rolling_nm_scale%.1f_nslice%i_fpw%.1f' % (scale, nslice, fpw)
+    fileroot = 'rolling_nm_scale%.2f_nslice%i_fpw%.1f' % (scale, nslice, fpw)
     if ~grow_blob:
         fileroot += '_unc_'
     if nexp != 2:
