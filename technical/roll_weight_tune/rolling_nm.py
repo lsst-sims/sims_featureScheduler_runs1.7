@@ -505,7 +505,7 @@ if __name__ == "__main__":
     extra_info['file executed'] = os.path.realpath(__file__)
 
     fileroot = 'rolling_nm_scale%.2f_nslice%i_fpw%.1f' % (scale, nslice, fpw)
-    if ~grow_blob:
+    if not grow_blob:
         fileroot += '_unc_'
     if nexp != 2:
         fileroot += 'nexp%i_' % nexp
