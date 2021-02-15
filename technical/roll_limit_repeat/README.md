@@ -1,0 +1,1 @@
+Try out new basis function to supress repeating area of the sky.
