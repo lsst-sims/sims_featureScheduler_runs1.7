@@ -1,0 +1,16 @@
+python rolling_nm.py --nslice 2 --fpw 0.750000 --nrw -6.000000
+python rolling_nm.py --nslice 2 --fpw 0.750000 --nrw -3.000000
+python rolling_nm.py --nslice 2 --fpw 0.750000 --nrw -1.000000
+python rolling_nm.py --nslice 2 --fpw 0.750000 --nrw 0.000000
+python rolling_nm.py --nslice 3 --fpw 0.750000 --nrw -6.000000
+python rolling_nm.py --nslice 3 --fpw 0.750000 --nrw -3.000000
+python rolling_nm.py --nslice 3 --fpw 0.750000 --nrw -1.000000
+python rolling_nm.py --nslice 3 --fpw 0.750000 --nrw 0.000000
+python rolling_nm.py --nslice 2 --fpw 0.900000 --nrw -6.000000
+python rolling_nm.py --nslice 2 --fpw 0.900000 --nrw -3.000000
+python rolling_nm.py --nslice 2 --fpw 0.900000 --nrw -1.000000
+python rolling_nm.py --nslice 2 --fpw 0.900000 --nrw 0.000000
+python rolling_nm.py --nslice 3 --fpw 0.900000 --nrw -6.000000
+python rolling_nm.py --nslice 3 --fpw 0.900000 --nrw -3.000000
+python rolling_nm.py --nslice 3 --fpw 0.900000 --nrw -1.000000
+python rolling_nm.py --nslice 3 --fpw 0.900000 --nrw 0.000000
