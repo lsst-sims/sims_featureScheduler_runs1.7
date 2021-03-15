@@ -1,0 +1,2 @@
+python bulge_roll.py --nslice 2
+python bulge_roll.py --nslice 3

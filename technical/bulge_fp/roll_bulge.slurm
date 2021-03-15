@@ -58,4 +58,4 @@ cd /gscratch/scrubbed/yoachim/sims_featureScheduler_runs1.7/technical/bulge_fp
 ## run all the baseline commands in parallel
 module load parallel-20170722
 
-cat run_rolling.script | parallel -j 20
+cat run_bulge_roll.script | parallel -j 20
