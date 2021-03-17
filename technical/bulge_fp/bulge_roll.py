@@ -474,7 +474,7 @@ if __name__ == "__main__":
     parser.add_argument("--nslice", type=int, default=2)
     parser.add_argument("--scale", type=float, default=0.90)
     parser.add_argument("--nexp", type=int, default=2)
-    parser.add_argument("--fpw", type=float, default=1.0)
+    parser.add_argument("--fpw", type=float, default=0.9)
     parser.add_argument("--nrw", type=float, default=-1.)
     parser.add_argument("--nogrow", dest='nogrow', action='store_true')
     parser.set_defaults(nogrow=False)
