@@ -33,7 +33,7 @@
 
 ## Specify the working directory for this job
 
-#SBATCH --chdir=/gscratch/scrubbed/yoachim/sims_featureScheduler_runs1.7/technical/bulge_fp
+#SBATCH --chdir=/gscratch/scrubbed/yoachim/sims_featureScheduler_runs1.7/technical/maf
 
 ##turn on e-mail notification
 
@@ -53,7 +53,7 @@ setup sims_maf -t $USER -t sims_w_2020_02
 setup sims_maf_contrib -t $USER -t sims_w_2020_02
 
 
-cd /gscratch/scrubbed/yoachim/sims_featureScheduler_runs1.7/technical/bulge_fp
+cd /gscratch/scrubbed/yoachim/sims_featureScheduler_runs1.7/technical/maf
 
 ## run all the baseline commands in parallel
 module load parallel-20170722
