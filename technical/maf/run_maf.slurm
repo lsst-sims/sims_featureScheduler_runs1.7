@@ -48,9 +48,9 @@
 ## Set up the evironment
 source /gscratch/astro/yoachim/lsst/loadLSST.bash
 setup sims_maps -t $USER
-setup sims_featureScheduler -t $USER -t sims_w_2020_02
-setup sims_maf -t $USER -t sims_w_2020_02
-setup sims_maf_contrib -t $USER -t sims_w_2020_02
+setup sims_featureScheduler -t $USER -t sims_w_2021_11
+setup sims_maf -t $USER -t sims_w_2021_11
+setup sims_maf_contrib -t $USER -t sims_w_2021_11
 
 
 cd /gscratch/scrubbed/yoachim/sims_featureScheduler_runs1.7/technical/maf
