@@ -1,5 +1,6 @@
 import matplotlib
 matplotlib.use("TkAgg")
+import matplotlib.pylab as plt
 import os
 import glob
 import shutil
