@@ -1,2 +1,5 @@
 python bulge_roll.py --nslice 2
 python bulge_roll.py --nslice 3
+python full_disk.py --nslice 2
+python full_disk.py --nslice 3
+python full_disk2.py
