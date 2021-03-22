@@ -1,12 +1,16 @@
-python ../../scimaf_dir.py --db baseline_nexp2_v1.7_10yrs.db
-python ../../scimaf_dir.py --db bulge_roll_scale0.90_nslice2_fpw0.9_nrw1.0v1.7_10yrs.db
-python ../../scimaf_dir.py --db bulge_roll_scale0.90_nslice3_fpw0.9_nrw1.0v1.7_10yrs.db
-python ../../scimaf_dir.py --db footprint_6_v1.710yrs.db
-python ../../scimaf_dir.py --db rolling_nm_scale0.90_nslice2_fpw0.9_nrw1.0v1.7_10yrs.db
-python ../../scimaf_dir.py --db rolling_nm_scale0.90_nslice3_fpw0.9_nrw1.0v1.7_10yrs.db
-python ../../glance_dir.py --db baseline_nexp2_v1.7_10yrs.db
-python ../../glance_dir.py --db bulge_roll_scale0.90_nslice2_fpw0.9_nrw1.0v1.7_10yrs.db
-python ../../glance_dir.py --db bulge_roll_scale0.90_nslice3_fpw0.9_nrw1.0v1.7_10yrs.db
-python ../../glance_dir.py --db footprint_6_v1.710yrs.db
-python ../../glance_dir.py --db rolling_nm_scale0.90_nslice2_fpw0.9_nrw1.0v1.7_10yrs.db
-python ../../glance_dir.py --db rolling_nm_scale0.90_nslice3_fpw0.9_nrw1.0v1.7_10yrs.db
+python ../../scimaf_dir.py bulge_roll_scale0.90_nslice2_fpw0.9_nrw1.0v1.7_10yrs.db
+python ../../scimaf_dir.py bulge_roll_scale0.90_nslice3_fpw0.9_nrw1.0v1.7_10yrs.db
+python ../../scimaf_dir.py footprint_6_v1.710yrs.db
+python ../../scimaf_dir.py full_disk_scale0.90_nslice2_fpw0.9_nrw1.0v1.7_10yrs.db
+python ../../scimaf_dir.py full_disk_scale0.90_nslice3_fpw0.9_nrw1.0v1.7_10yrs.db
+python ../../scimaf_dir.py full_disk_v1.7_10yrs.db
+python ../../scimaf_dir.py rolling_nm_scale0.90_nslice2_fpw0.9_nrw1.0v1.7_10yrs.db
+python ../../scimaf_dir.py rolling_nm_scale0.90_nslice3_fpw0.9_nrw1.0v1.7_10yrs.db
+python ../../glance_dir.py bulge_roll_scale0.90_nslice2_fpw0.9_nrw1.0v1.7_10yrs.db
+python ../../glance_dir.py bulge_roll_scale0.90_nslice3_fpw0.9_nrw1.0v1.7_10yrs.db
+python ../../glance_dir.py footprint_6_v1.710yrs.db
+python ../../glance_dir.py full_disk_scale0.90_nslice2_fpw0.9_nrw1.0v1.7_10yrs.db
+python ../../glance_dir.py full_disk_scale0.90_nslice3_fpw0.9_nrw1.0v1.7_10yrs.db
+python ../../glance_dir.py full_disk_v1.7_10yrs.db
+python ../../glance_dir.py rolling_nm_scale0.90_nslice2_fpw0.9_nrw1.0v1.7_10yrs.db
+python ../../glance_dir.py rolling_nm_scale0.90_nslice3_fpw0.9_nrw1.0v1.7_10yrs.db
