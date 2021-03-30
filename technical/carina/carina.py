@@ -15,7 +15,12 @@ import os
 import argparse
 import copy
 from lsst.sims.featureScheduler.surveys import BaseSurvey
-
+from lsst.sims.almanac import Almanac
+from astropy.coordinates import EarthLocation
+from astropy.time import Time
+from lsst.sims.downtimeModel import ScheduledDowntimeData
+from scipy.interpolate import interp1d
+from lsst.sims.utils import Site
 
 
 def gen_carina_sequence(ra=161.264583, dec=-59.68445833, survey_name='carina',
@@ -24,7 +29,7 @@ def gen_carina_sequence(ra=161.264583, dec=-59.68445833, survey_name='carina',
     """Generate a list of times to observe Carina
     """
     # XXX--temp
-    ra = 300.
+    # ra = 300.
 
     ra = np.radians(ra)
     dec = np.radians(dec)
@@ -47,6 +52,68 @@ def gen_carina_sequence(ra=161.264583, dec=-59.68445833, survey_name='carina',
             obs['note'] = survey_name
             observations.append(obs)
     return {'carina': np.array(observations)}
+
+
+def pick_times(mjd_start=59853.5, moon_limit=35, run_length=7):
+    """Need to pick times
+    """
+    # want 7 consecutive days where carina is visible most of the night
+    # the moon is < 40% illuminated
+    # there is no scheduled downtime
+
+    mjd_start_time = Time(mjd_start, format='mjd')
+
+    site = Site('LSST')
+    location = EarthLocation(lat=site.latitude, lon=site.longitude,
+                             height=site.height)
+    sched_downtime_data = ScheduledDowntimeData(mjd_start_time)
+    sched_downtimes = sched_downtime_data()
+
+    down_starts = []
+    down_ends = []
+    for dt in sched_downtimes:
+        down_starts.append(dt['start'].mjd)
+        down_ends.append(dt['end'].mjd)
+    downtimes = np.array(list(zip(down_starts, down_ends)), dtype=list(zip(['start', 'end'], [float, float])))
+    downtimes.sort(order='start')
+
+    almanac = Almanac(mjd_start=mjd_start)
+    moon_phases = interp1d(almanac.sun_moon['mjd'], almanac.sun_moon['moon_phase'])(almanac.sunsets['sun_n18_setting'])
+
+    possible_nights = np.ones(moon_phases.size)
+    possible_nights[np.where(moon_phases > moon_limit)] = 0
+
+    # block out anything too early
+    possible_nights[np.where(almanac.sunsets['sun_n18_setting'] < mjd_start)] = 0
+
+    # do a loop to block out all the nights between downtime start and end
+    for dt in downtimes:
+        indx1 = almanac.mjd_indx(dt['start'])
+        indx2 = almanac.mjd_indx(dt['end'])
+        possible_nights[indx1:indx2+1] = 0
+
+
+    # XXX----mark out nights where the target is not up long enough.
+    # Maybe has to be 2 hours before sunset and 2 hours before sunrise?
+
+
+    counter = 0
+    running_count = np.zeros(possible_nights.size)
+    for i, val in enumerate(possible_nights[0:-1]):
+        running_count[i] += counter
+        if val > 0:
+            counter += 1
+        else:
+            counter = 0
+    import pdb ; pdb.set_trace()
+    possible_ends = np.where(running_count >= run_length)[0]
+
+    for i in range(0,run_length):
+        possible_nights[possible_ends-i] += 1
+    possible_nights[np.where(possible_nights <=1)] = 0
+    possible_nights[np.where(possible_nights > 1)] = 1
+
+
 
 
 def gen_carina_times():
