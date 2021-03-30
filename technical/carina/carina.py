@@ -16,11 +16,13 @@ import argparse
 import copy
 from lsst.sims.featureScheduler.surveys import BaseSurvey
 from lsst.sims.almanac import Almanac
-from astropy.coordinates import EarthLocation
+from astropy.coordinates import EarthLocation, SkyCoord
 from astropy.time import Time
 from lsst.sims.downtimeModel import ScheduledDowntimeData
 from scipy.interpolate import interp1d
 from lsst.sims.utils import Site
+from astroplan import FixedTarget, Observer
+import astropy.units as u
 
 
 def gen_carina_sequence(ra=161.264583, dec=-59.68445833, survey_name='carina',
@@ -34,7 +36,21 @@ def gen_carina_sequence(ra=161.264583, dec=-59.68445833, survey_name='carina',
     ra = np.radians(ra)
     dec = np.radians(dec)
 
-    observations = []
+    observations = [59992.03798772348, 59993.03717235476, 59994.03634883789, 59995.03551756684, 
+    59996.0346789225, 59997.03383325506, 59998.03298097197, 60347.04577312805, 60348.04506823188, 
+    60349.044350427575, 60350.04362015519, 60351.04287783196, 60352.04212389188, 60353.041358765215,
+    60731.03080681572, 60732.0299360645, 60733.02906059101, 60734.02818073612, 60735.02729685325, 
+    60736.026409286074, 60737.025518379174, 61084.04094713647, 61085.04016599804, 61086.03937504534, 
+    61087.03857469326, 61088.03776538372, 61089.03694753628, 61090.036121559795, 61439.04827445885, 
+    61440.04762212513, 61441.046955060214, 61442.04627373023, 61443.04557859991, 61444.04487013258, 
+    61445.04414878599, 61822.034851515666, 61823.0340069863, 61824.03315593768, 61825.03229877073, 
+    61826.03143587429, 61827.03056854941, 61828.02969670808, 62177.043024341576, 62178.04227262642, 
+    62179.041509832256, 62180.04073640052, 62181.03995276522, 62182.03915935382, 62183.03835657565, 
+    62534.04873317061, 62535.048092107754, 62536.04743590718, 62537.046765011735, 62538.046079882886, 
+    62539.045380986296, 62540.04466879275, 62915.03711327491, 62916.03628921276, 62917.03545752028, 
+    62918.03461858956, 62919.0337727773, 62920.032920483965, 62921.032062082086, 63270.04501105705, 
+    63271.04429272283, 63272.04356206162, 63273.042819500435, 63274.04206547048, 63275.041300386656, 
+    63276.04052466573]
     for num, filtername in zip(nvis, sequence):
         # XXX--in theory, we could use decimal nvis and do a random number draw here, so
         # nvis=2.5 means 2 half the time and 3 half the time.
@@ -66,6 +82,7 @@ def pick_times(mjd_start=59853.5, moon_limit=35, run_length=7):
     site = Site('LSST')
     location = EarthLocation(lat=site.latitude, lon=site.longitude,
                              height=site.height)
+    rubin = Observer(location=location)
     sched_downtime_data = ScheduledDowntimeData(mjd_start_time)
     sched_downtimes = sched_downtime_data()
 
@@ -92,10 +109,19 @@ def pick_times(mjd_start=59853.5, moon_limit=35, run_length=7):
         indx2 = almanac.mjd_indx(dt['end'])
         possible_nights[indx1:indx2+1] = 0
 
-
     # XXX----mark out nights where the target is not up long enough.
     # Maybe has to be 2 hours before sunset and 2 hours before sunrise?
+    good = np.where(possible_nights > 0)[0]
+    carina_coord = SkyCoord(ra=161.264583*u.deg, dec=-59.68445833*u.deg)
+    times = Time(almanac.sunsets['sun_n18_setting'][good], format='mjd')
+    carina = FixedTarget(coord=carina_coord, name="Carina")
+    transit_times = rubin.target_meridian_transit_time(times, carina, n_grid_points=10)
+    diff1 = transit_times.mjd - almanac.sunsets['sun_n18_setting'][good]
+    diff2 = almanac.sunsets['sun_n18_rising'][good] - transit_times.mjd
+    delta = 2./24.
+    bts = np.where((diff1 < delta) | (diff2 < delta))[0]
 
+    possible_nights[good[bts]] = 0
 
     counter = 0
     running_count = np.zeros(possible_nights.size)
@@ -105,16 +131,23 @@ def pick_times(mjd_start=59853.5, moon_limit=35, run_length=7):
             counter += 1
         else:
             counter = 0
-    import pdb ; pdb.set_trace()
+    
     possible_ends = np.where(running_count >= run_length)[0]
 
-    for i in range(0,run_length):
+    for i in range(0, run_length):
         possible_nights[possible_ends-i] += 1
-    possible_nights[np.where(possible_nights <=1)] = 0
+    possible_nights[np.where(possible_nights <= 1)] = 0
     possible_nights[np.where(possible_nights > 1)] = 1
 
+    mjd_starts = []
+    for i in range(10):
+        start_indx = np.min(np.where(possible_nights > 0)[0])
+        mjd_starts.extend(almanac.sunsets['sun_n18_setting'][start_indx:start_indx+run_length].tolist())
+        # no to block out days near there
+        mask = np.where(almanac.sunsets['sun_n18_setting'] < (np.max(mjd_starts)+340))[0]
+        possible_nights[mask] = 0
 
-
+    print(mjd_starts)
 
 def gen_carina_times():
     """Let's figure out when we want to launch these things.
