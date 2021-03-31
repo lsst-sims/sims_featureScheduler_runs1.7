@@ -21,7 +21,6 @@ from astropy.time import Time
 from lsst.sims.downtimeModel import ScheduledDowntimeData
 from scipy.interpolate import interp1d
 from lsst.sims.utils import Site, _approx_RaDec2AltAz
-from astroplan import FixedTarget, Observer
 import astropy.units as u
 
 
@@ -58,6 +57,8 @@ def gen_carina_sequence(ra=161.264583, dec=-59.68445833, survey_name='carina',
 
 
 def pick_times(mjd_start=59853.5, moon_limit=35, run_length=7):
+    from astroplan import FixedTarget, Observer
+
     """Need to pick times
     """
     # want 7 consecutive days where carina is visible most of the night

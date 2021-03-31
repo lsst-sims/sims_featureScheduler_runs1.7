@@ -1,1 +1,2 @@
 python baseline.py
+python footprint_tune.py --fpid 6
