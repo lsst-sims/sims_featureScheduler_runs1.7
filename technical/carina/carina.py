@@ -20,7 +20,7 @@ from astropy.coordinates import EarthLocation, SkyCoord
 from astropy.time import Time
 from lsst.sims.downtimeModel import ScheduledDowntimeData
 from scipy.interpolate import interp1d
-from lsst.sims.utils import Site
+from lsst.sims.utils import Site, _approx_RaDec2AltAz
 from astroplan import FixedTarget, Observer
 import astropy.units as u
 
@@ -36,21 +36,7 @@ def gen_carina_sequence(ra=161.264583, dec=-59.68445833, survey_name='carina',
     ra = np.radians(ra)
     dec = np.radians(dec)
 
-    observations = [59992.03798772348, 59993.03717235476, 59994.03634883789, 59995.03551756684, 
-    59996.0346789225, 59997.03383325506, 59998.03298097197, 60347.04577312805, 60348.04506823188, 
-    60349.044350427575, 60350.04362015519, 60351.04287783196, 60352.04212389188, 60353.041358765215,
-    60731.03080681572, 60732.0299360645, 60733.02906059101, 60734.02818073612, 60735.02729685325, 
-    60736.026409286074, 60737.025518379174, 61084.04094713647, 61085.04016599804, 61086.03937504534, 
-    61087.03857469326, 61088.03776538372, 61089.03694753628, 61090.036121559795, 61439.04827445885, 
-    61440.04762212513, 61441.046955060214, 61442.04627373023, 61443.04557859991, 61444.04487013258, 
-    61445.04414878599, 61822.034851515666, 61823.0340069863, 61824.03315593768, 61825.03229877073, 
-    61826.03143587429, 61827.03056854941, 61828.02969670808, 62177.043024341576, 62178.04227262642, 
-    62179.041509832256, 62180.04073640052, 62181.03995276522, 62182.03915935382, 62183.03835657565, 
-    62534.04873317061, 62535.048092107754, 62536.04743590718, 62537.046765011735, 62538.046079882886, 
-    62539.045380986296, 62540.04466879275, 62915.03711327491, 62916.03628921276, 62917.03545752028, 
-    62918.03461858956, 62919.0337727773, 62920.032920483965, 62921.032062082086, 63270.04501105705, 
-    63271.04429272283, 63272.04356206162, 63273.042819500435, 63274.04206547048, 63275.041300386656, 
-    63276.04052466573]
+    observations = []
     for num, filtername in zip(nvis, sequence):
         # XXX--in theory, we could use decimal nvis and do a random number draw here, so
         # nvis=2.5 means 2 half the time and 3 half the time.
@@ -63,9 +49,10 @@ def gen_carina_sequence(ra=161.264583, dec=-59.68445833, survey_name='carina',
             else:
                 obs['exptime'] = exptime
                 obs['nexp'] = nexp
-            obs['RA'] = np.radians(ra)
-            obs['dec'] = np.radians(dec)
+            obs['RA'] = ra
+            obs['dec'] = dec
             obs['note'] = survey_name
+            obs['rotTelPos'] = 0.  # XXX--a brief check here
             observations.append(obs)
     return {'carina': np.array(observations)}
 
@@ -155,7 +142,21 @@ def gen_carina_times():
 
     # List of MJDs to start on. 
     # XXX--temp
-    mjds = [59853.989]
+    mjds = [59992.03798772348, 59993.03717235476, 59994.03634883789, 59995.03551756684, 
+    59996.0346789225, 59997.03383325506, 59998.03298097197, 60347.04577312805, 60348.04506823188, 
+    60349.044350427575, 60350.04362015519, 60351.04287783196, 60352.04212389188, 60353.041358765215,
+    60731.03080681572, 60732.0299360645, 60733.02906059101, 60734.02818073612, 60735.02729685325, 
+    60736.026409286074, 60737.025518379174, 61084.04094713647, 61085.04016599804, 61086.03937504534, 
+    61087.03857469326, 61088.03776538372, 61089.03694753628, 61090.036121559795, 61439.04827445885, 
+    61440.04762212513, 61441.046955060214, 61442.04627373023, 61443.04557859991, 61444.04487013258, 
+    61445.04414878599, 61822.034851515666, 61823.0340069863, 61824.03315593768, 61825.03229877073, 
+    61826.03143587429, 61827.03056854941, 61828.02969670808, 62177.043024341576, 62178.04227262642, 
+    62179.041509832256, 62180.04073640052, 62181.03995276522, 62182.03915935382, 62183.03835657565, 
+    62534.04873317061, 62535.048092107754, 62536.04743590718, 62537.046765011735, 62538.046079882886, 
+    62539.045380986296, 62540.04466879275, 62915.03711327491, 62916.03628921276, 62917.03545752028, 
+    62918.03461858956, 62919.0337727773, 62920.032920483965, 62921.032062082086, 63270.04501105705, 
+    63271.04429272283, 63272.04356206162, 63273.042819500435, 63274.04206547048, 63275.041300386656, 
+    63276.04052466573]
     full_list = []
     step = 30./60/24.  # to days
     n = 22  # try for this many
@@ -166,6 +167,18 @@ def gen_carina_times():
         full_list.extend(temp.tolist())
 
     full_list = np.array(full_list)
+
+    # Let's compute the altitude of these little bastards
+    #alts = []
+    #ra=np.radians(161.264583)
+    #dec=np.radians(-59.68445833)
+    #site = Site('LSST')
+    #for mjd in full_list:
+    #    alt, az = _approx_RaDec2AltAz(ra, dec, site.latitude_rad,
+    #                                  site.longitude_rad, mjd)
+    #    alts.append(alt)
+    #import pdb ; pdb.set_trace()
+
     # 
     names = ['mjd_start', 'mjd_end', 'label']
     types = [float, float, '|U20']
@@ -220,12 +233,14 @@ class Scheduled_ddfs(BaseSurvey):
             target_HA = (conditions.lmst - ra*12/np.pi) % 24
             in_HA_range = False
 
+
             for ha_range in self.ha_dict[self.times_array[indx]['label']]:
                 lres = np.min(ha_range) <= target_HA < np.max(ha_range)
                 in_HA_range = in_HA_range | lres
 
             #if conditions.mjd > 59854.3:
             #    import pdb ; pdb.set_trace()
+            #import pdb ; pdb.set_trace()
             if in_HA_range:
                 result = True
                 self.observations = copy.deepcopy(self.sequence_dict[self.times_array[indx]['label']])
@@ -538,6 +553,7 @@ def run_sched(surveys, survey_length=365.25, nside=32, fileroot='baseline_', ver
     n_visit_limit = None
     filter_sched = simple_filter_sched(illum_limit=illum_limit)
     observatory = Model_observatory(nside=nside)
+
     observatory, scheduler, observations = sim_runner(observatory, scheduler,
                                                       survey_length=survey_length,
                                                       filename=fileroot+'%iyrs.db' % years,
@@ -616,6 +632,7 @@ if __name__ == "__main__":
     carina_survey = [Scheduled_ddfs(times_array, sequence_dict, ha_dict, detailers=details)]
 
     surveys = [carina_survey, ddfs, blobs, greedy]
+    #surveys = [ddfs, blobs, greedy]
     run_sched(surveys, survey_length=survey_length, verbose=verbose,
               fileroot=os.path.join(outDir, fileroot+file_end), extra_info=extra_info,
               nside=nside, illum_limit=illum_limit)
