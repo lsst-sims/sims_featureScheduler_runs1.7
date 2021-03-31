@@ -168,18 +168,6 @@ def gen_carina_times():
 
     full_list = np.array(full_list)
 
-    # Let's compute the altitude of these little bastards
-    #alts = []
-    #ra=np.radians(161.264583)
-    #dec=np.radians(-59.68445833)
-    #site = Site('LSST')
-    #for mjd in full_list:
-    #    alt, az = _approx_RaDec2AltAz(ra, dec, site.latitude_rad,
-    #                                  site.longitude_rad, mjd)
-    #    alts.append(alt)
-    #import pdb ; pdb.set_trace()
-
-    # 
     names = ['mjd_start', 'mjd_end', 'label']
     types = [float, float, '|U20']
     result = np.zeros(len(full_list), dtype=list(zip(names, types)))
@@ -238,9 +226,6 @@ class Scheduled_ddfs(BaseSurvey):
                 lres = np.min(ha_range) <= target_HA < np.max(ha_range)
                 in_HA_range = in_HA_range | lres
 
-            #if conditions.mjd > 59854.3:
-            #    import pdb ; pdb.set_trace()
-            #import pdb ; pdb.set_trace()
             if in_HA_range:
                 result = True
                 self.observations = copy.deepcopy(self.sequence_dict[self.times_array[indx]['label']])
@@ -280,11 +265,6 @@ class Scheduled_ddfs(BaseSurvey):
             final_result = [row.reshape(1,) for row in result]
             result = final_result
 
-            #if conditions.mjd > 59854.3:
-            #    import pdb ; pdb.set_trace()
-            # Assume if we've gotten here, the observations are on the way to being executed,
-            # Mark them as complete. Could get fancier, but let's see if simple works
-            # XXX--might need to have a way to mark complete if we restart?
             self.observation_complete[self.indx] = True
 
         return result
