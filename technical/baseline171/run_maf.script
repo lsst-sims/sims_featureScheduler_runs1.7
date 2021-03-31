@@ -1,0 +1,4 @@
+python ../../glance_dir.py --db baseline_nexp2_v1.7.1_10yrs.db
+python ../../glance_dir.py --db footprint_6_v1.7.1_10yrs.db
+python ../../scimaf_dir.py --db baseline_nexp2_v1.7.1_10yrs.db
+python ../../scimaf_dir.py --db footprint_6_v1.7.1_10yrs.db
