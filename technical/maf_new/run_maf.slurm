@@ -46,6 +46,9 @@
 #SBATCH --export=all
 
 ## Set up the evironment
+which conda
+which python
+env
 conda activate rubin
 
 cd /gscratch/scrubbed/yoachim/sims_featureScheduler_runs1.7/technical/maf_new
