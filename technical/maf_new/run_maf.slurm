@@ -33,7 +33,7 @@
 
 ## Specify the working directory for this job
 
-#SBATCH --chdir=/gscratch/scrubbed/yoachim/sims_featureScheduler_runs1.7/technical/maf
+#SBATCH --chdir=/gscratch/scrubbed/yoachim/sims_featureScheduler_runs1.7/technical/maf_new
 
 ##turn on e-mail notification
 
