@@ -23,7 +23,6 @@ def slice_wfd_area_quad(target_map, nslice=2):
 
     wfd = target_map['r'] * 0
     wfd_indices = np.where(target_map['r'] == 1)[0]
-    import pdb ; pdb.set_trace()
     wfd[wfd_indices] = 1
     wfd_accum = np.cumsum(wfd)
     split_wfd_indices = np.floor(np.max(wfd_accum)/nslice2*(np.arange(nslice2)+1)).astype(int)
