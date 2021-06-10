@@ -23,6 +23,7 @@ def slice_wfd_area_quad(target_map, nslice=2):
 
     wfd = target_map['r'] * 0
     wfd_indices = np.where(target_map['r'] == 1)[0]
+    import pdb ; pdb.set_trace()
     wfd[wfd_indices] = 1
     wfd_accum = np.cumsum(wfd)
     split_wfd_indices = np.floor(np.max(wfd_accum)/nslice2*(np.arange(nslice2)+1)).astype(int)
@@ -291,9 +292,8 @@ def make_rolling_footprints(mjd_start=59853.5, sun_RA_start=3.27717639, nslice=2
     _temp = np.load('survey_footprint.npz')
     hp_footprints = {}
     # ugh, counting on the WFD area to be 1 in the r band
-    norm_val = _temp['r'].max()
     for key in _temp.keys():
-        hp_footprints[key] = match_hp_resolution(_temp[key], nside_out=nside)/norm_val
+        hp_footprints[key] = match_hp_resolution(_temp[key], nside_out=nside)
     _temp.close()
 
     down = 1.-scale
