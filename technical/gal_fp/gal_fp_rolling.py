@@ -395,12 +395,6 @@ if __name__ == "__main__":
     fileroot = 'galfp_rolling_'
     file_end = 'v1.8_'
 
-    _temp = np.load('survey_footprint.npz')
-    footprints_hp = {}
-    for key in _temp.keys():
-        footprints_hp[key] = match_hp_resolution(_temp[key], nside_out=nside)
-    _temp.close()
-
     observatory = Model_observatory(nside=nside)
     conditions = observatory.return_conditions()
     # Set up rolling maps
