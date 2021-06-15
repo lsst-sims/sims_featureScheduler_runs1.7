@@ -1,0 +1,4 @@
+glance_dir --db baseline_nexp2_v1.7.1_10yrs.db
+glance_dir --db no_rot_v1.7.1_10yrs.db
+scimaf_dir --db baseline_nexp2_v1.7.1_10yrs.db
+scimaf_dir --db no_rot_v1.7.1_10yrs.db
